@@ -1,0 +1,42 @@
+name: rando_alerte
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  flutter_map: ^8.3.0
+  flutter_map_tile_caching: ^10.1.1
+  latlong2: ^0.9.1
+  geolocator: ^14.0.2
+  xml: ^6.6.1
+  file_picker: ^11.0.2
+  http: ^1.6.0
+  url_launcher: ^6.3.2
+  shared_preferences: ^2.5.5
+  supabase_flutter: ^2.12.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.13.1  # <-- Ajout pour les icônes
+
+flutter:
+  assets:
+    - assets/images/icon.png  # <-- Ton icône
+
+  uses-material-design: true
+
+# Configuration pour flutter_launcher_icons
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/icon.png"
+  adaptive_icon_background: "#4CAF50"  # Fond vert (comme ton app)

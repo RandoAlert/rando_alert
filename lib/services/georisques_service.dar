@@ -1,0 +1,25 @@
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+class GeorisquesService {
+  static Future<String?> getRisqueIncendie(String departementCode) async {
+    try {
+      // URL de l'API Géorisques pour les risques feux de forêt
+      final url = Uri.parse(
+        'https://www.georisques.gouv.fr/api/v1/feux_foret/departements/$departementCode',
+      );
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        // Exemple : Vérifier si le risque est actif
+        if (data['risque'] == true) {
+          return data['niveau'] ?? 'élevé'; // "faible", "modéré", "élevé", "très élevé"
+        }
+      }
+    } catch (e) {
+      print('Erreur GeorisquesService: $e');
+      return null;
+    }
+    return null;
+  }
+}
