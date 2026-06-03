@@ -1,3 +1,4 @@
+import 'ecran_meteo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -630,6 +631,18 @@ class _CartePageState extends State<CartePage> {
         title: const Text('RandoAlert'),
         backgroundColor: Colors.green,
         actions: [
+          IconButton(
+            icon: const Icon(Icons.cloud_outlined),
+            tooltip: 'Météo',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const EcranMeteoRando(),
+                ),
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.folder_open),
             onPressed: _ouvrirGPX,
