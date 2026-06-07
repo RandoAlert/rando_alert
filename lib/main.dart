@@ -292,42 +292,6 @@ class RandoAlerteApp extends StatelessWidget {
   }
 }
 
-class CartePage extends StatelessWidget {
-  final List<LatLng>
-      pointsGPX; // 👈 Assurez-vous que c'est écrit exactement comme ça
-
-  const CartePage({super.key, required this.pointsGPX}); // 👈 Et ici aussi
-  @override
-  State<CartePage> createState() => _CartePageState();
-}
-
-class _CartePageState extends State<CartePage> {
-  final MapController _mapController = MapController();
-
-  // FIX SECURITE : On démarre sur une vraie valeur par défaut stable (Angers / Angrie)
-  LatLng _position = const LatLng(47.5684, -0.7831);
-  double _monAltitude = 0.0;
-  bool _chargement = true;
-  List<PointGPX> _pointsGPX = [];
-  CarteDef _carteActive = fondsDeCartes[0];
-  List<Signalement> _signalements = [];
-
-  String? _alerteMeteo;
-  Color _couleurAlerte = Colors.transparent;
-
-  bool _modeSuiviActif = true;
-  Timer? _timerRecentrage;
-
-  LatLng? _cibleVisee;
-  double _cibleAltitude = 0.0;
-  double _distanceViseeMetres = 0.0;
-
-  @override
-  void initState() {
-    super.initState();
-    _initialiserGPS();
-  }
-
   @override
   void dispose() {
     _timerRecentrage?.cancel();
