@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class EcranMeteoRando extends StatelessWidget {
-  const EcranMeteoRando({Key? key}) : super(key: key);
+  const EcranMeteoRando({super.key});
 
   @override
   Widget build(BuildContext context) {

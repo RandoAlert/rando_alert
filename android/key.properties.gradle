@@ -1,0 +1,15 @@
+def keyFile = rootProject.file('key.properties')
+if (keyFile.exists()) {
+    def keyProperties = new Properties()
+    keyProperties.load(new FileInputStream(keyFile))
+    android {
+        signingConfigs {
+            release {
+                storeFile file(keyProperties['storeFile'])
+                storePassword keyProperties['storePassword']
+                keyAlias keyProperties['keyAlias']
+                keyPassword keyProperties['keyPassword']
+            }
+        }
+    }
+}

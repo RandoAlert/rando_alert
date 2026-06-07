@@ -24,14 +24,12 @@ class GeoLocationService {
     if (position.latitude.isNaN ||
         position.longitude.isNaN ||
         !position.latitude.isFinite ||
-        !position.longitude.isFinite)
-      return 0.0;
+        !position.longitude.isFinite) return 0.0;
     try {
       final url =
           'https://data.geopf.fr/altimetrie/resources/elevation.json?lon=${position.longitude}&lat=${position.latitude}';
-      final response = await http
-          .get(Uri.parse(url))
-          .timeout(const Duration(seconds: 3));
+      final response =
+          await http.get(Uri.parse(url)).timeout(const Duration(seconds: 3));
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         final elevations = data['elevations'] as List<dynamic>?;
@@ -54,19 +52,16 @@ class MeteoService {
         pos.longitude.isNaN ||
         !pos.latitude.isFinite ||
         !pos.longitude.isFinite ||
-        pos.latitude == 0.0)
-      return null;
+        pos.latitude == 0.0) return null;
     try {
       final url =
           'https://api.open-meteo.com/v1/forecast?latitude=${pos.latitude}&longitude=${pos.longitude}&current=weather_code&timezone=auto&models=meteofrance&alert_events=true';
-      final response = await http
-          .get(Uri.parse(url))
-          .timeout(const Duration(seconds: 4));
+      final response =
+          await http.get(Uri.parse(url)).timeout(const Duration(seconds: 4));
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        final warnings =
-            data['warnings'] as List<dynamic>? ??
+        final warnings = data['warnings'] as List<dynamic>? ??
             data['alerts'] as List<dynamic>?;
 
         if (warnings != null && warnings.isNotEmpty) {
@@ -353,9 +348,8 @@ class _CartePageState extends State<CartePage> {
           dernierePos.longitude.isFinite) {
         setState(() {
           _position = LatLng(dernierePos.latitude, dernierePos.longitude);
-          _monAltitude = dernierePos.altitude.isNaN
-              ? 0.0
-              : dernierePos.altitude;
+          _monAltitude =
+              dernierePos.altitude.isNaN ? 0.0 : dernierePos.altitude;
           _chargement = false;
         });
         _verifierAlerteMeteoOpenMeteo();
@@ -414,8 +408,7 @@ class _CartePageState extends State<CartePage> {
     if (_position.latitude.isNaN ||
         _cibleVisee!.latitude.isNaN ||
         !_position.latitude.isFinite ||
-        !_cibleVisee!.latitude.isFinite)
-      return;
+        !_cibleVisee!.latitude.isFinite) return;
 
     setState(() {
       _distanceViseeMetres = Geolocator.distanceBetween(
@@ -431,8 +424,7 @@ class _CartePageState extends State<CartePage> {
     if (point.latitude.isNaN ||
         point.longitude.isNaN ||
         !point.latitude.isFinite ||
-        !point.longitude.isFinite)
-      return;
+        !point.longitude.isFinite) return;
     setState(() {
       _cibleVisee = point;
       _cibleAltitude = 0.0;
@@ -470,7 +462,11 @@ class _CartePageState extends State<CartePage> {
   }
 
   void _ouvrirGPX() async {
-    final result = await FilePicker.pickFiles(type: FileType.any);
+    //  NOUVEAU CODE
+//  NOUVELLE SYNTAXE UNIQUE POUR FILE_PICKER v8+
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.any,
+    );
     if (result == null) return;
     try {
       final file = File(result.files.single.path!);
@@ -623,8 +619,8 @@ class _CartePageState extends State<CartePage> {
 
     double margeBasseBoutons =
         (_alerteMeteo != null && _couleurAlerte != Colors.transparent)
-        ? 70.0
-        : 20.0;
+            ? 70.0
+            : 20.0;
 
     return Scaffold(
       appBar: AppBar(
@@ -701,9 +697,8 @@ class _CartePageState extends State<CartePage> {
                         PolylineLayer(
                           polylines: [
                             Polyline(
-                              points: _pointsGPX
-                                  .map((p) => p.position)
-                                  .toList(),
+                              points:
+                                  _pointsGPX.map((p) => p.position).toList(),
                               strokeWidth: 4.0,
                               color: Colors.blue,
                             ),
@@ -765,7 +760,6 @@ class _CartePageState extends State<CartePage> {
                       ),
                     ],
                   ),
-
                   if (_cibleVisee != null)
                     Positioned(
                       top: 12,
@@ -809,7 +803,6 @@ class _CartePageState extends State<CartePage> {
                         ),
                       ),
                     ),
-
                   Positioned(
                     bottom: margeBasseBoutons,
                     right: 16,
@@ -819,12 +812,10 @@ class _CartePageState extends State<CartePage> {
                         FloatingActionButton(
                           heroTag: 'gps',
                           mini: true,
-                          backgroundColor: _modeSuiviActif
-                              ? Colors.green
-                              : Colors.white,
-                          foregroundColor: _modeSuiviActif
-                              ? Colors.white
-                              : Colors.green,
+                          backgroundColor:
+                              _modeSuiviActif ? Colors.green : Colors.white,
+                          foregroundColor:
+                              _modeSuiviActif ? Colors.white : Colors.green,
                           onPressed: () {
                             if (!_position.latitude.isNaN) {
                               setState(() => _modeSuiviActif = true);
@@ -848,7 +839,6 @@ class _CartePageState extends State<CartePage> {
                       ],
                     ),
                   ),
-
                   if (_alerteMeteo != null &&
                       _couleurAlerte != Colors.transparent)
                     Positioned(
