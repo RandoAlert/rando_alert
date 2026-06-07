@@ -1,3 +1,4 @@
+import 'ecran_carte.dart';
 import 'ecran_meteo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -291,8 +292,11 @@ class RandoAlerteApp extends StatelessWidget {
   }
 }
 
-class CartePage extends StatefulWidget {
-  const CartePage({super.key});
+class CartePage extends StatelessWidget {
+  final List<LatLng>
+      pointsGPX; // 👈 Assurez-vous que c'est écrit exactement comme ça
+
+  const CartePage({super.key, required this.pointsGPX}); // 👈 Et ici aussi
   @override
   State<CartePage> createState() => _CartePageState();
 }
@@ -634,8 +638,7 @@ class _CartePageState extends State<CartePage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const EcranMeteoRando(),
-                ),
+                    builder: (context) => CartePage(pointsGPX: _pointsGPX)),
               );
             },
           ),
