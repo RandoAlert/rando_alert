@@ -1,0 +1,8 @@
+RandoAlert est le compagnon GPS indispensable pour vos randonnées, pensé pour votre sécurité et le partage communautaire.
+
+Fonctionnalités principales :
+• Cartographie & GPX : Importez et suivez facilement vos tracés GPX favoris (idéal pour vos parcours issus de RandoGPS, VisuGPX, etc.).
+• Signalement en temps réel (Style Waze) : Un arbre en travers du chemin ? Un sentier inondé ou un danger ? Signalez-le instantanément pour informer les autres randonneurs et arpentez les sentiers l'esprit tranquille.
+• Météo & Vigilances : Parce qu'une bonne randonnée s'anticipe, profitez d'une intégration météo complète avant et pendant votre sortie, incluant les alertes de vigilance officielles de Météo-France (vents violents, canicule, tempêtes...).
+
+Rejoignez la communauté RandoAlert et sécurisons ensemble nos chemins de randonnée !
