@@ -1,0 +1,16 @@
+name: Reveil Automatique Supabase
+
+on:
+  schedule:
+    # Se déclenche automatiquement tous les jours à 6h00 UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Permet aussi de lancer le script manuellement depuis le site GitHub
+
+jobs:
+  ping_supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Faire une requête anonyme sur l'API Supabase
+        run: |
+          curl -X GET "https://sybfkrkmgaikofmpptqa.supabase.co/rest/v1/" \
+          -H "apikey: ${{ 'sb_publishable_eV3P0v5ytn6TMBUAObQzyQ_gXZSJjU7' }}"
